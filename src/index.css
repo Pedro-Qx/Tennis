@@ -84,6 +84,18 @@ p {
   display: flex;
   justify-content: space-between;
 }
+.player-points{
+  font-size: 1.4rem;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background-color: darkred;
+  color: white;
+  border-radius: 0.3rem;
+  line-height: 1.5;
+  display: flex;
+  justify-content: space-between;
+}
 
 .player-games {
   font-size: 1.4rem;

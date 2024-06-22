@@ -3,12 +3,14 @@ import { Display } from './Display';
 import { PlayPauseButton } from './Components/PlayPauseButton';
 import { PointScoredButton } from './Components/PointScoredButton';
 import { ResetButton } from './Components/ResetButton';
-import { Historical } from './Components/Historical';
 import { PlayerScore } from './Components/PlayerScore';
+import { PlayerPoints } from './Components/PlayerPoints';
 
 function App() {
   return (
     <div className="App">
+      <PlayerPoints playerId="player1" playerName="Player 1" />
+      <PlayerPoints playerId="player2" playerName="Player 2" />
       <Display />
       <PlayerScore playerId="player1" playerName="Player 1"/>
       <PlayerScore playerId="player2" playerName="Player 2"/>
@@ -20,7 +22,6 @@ function App() {
         <ResetButton />
         <PlayPauseButton />
       </div>
-      <Historical/>
     </div>
   );
 }

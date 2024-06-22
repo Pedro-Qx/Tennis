@@ -8,9 +8,21 @@ const initialState = {
     player2Score: 0,
     advantage: null,
     winner: null,
-    p1WinGame: 0,
-    p2WinGame: 0,
-    
+    p1Win: 0,
+    p2Win: 0,
+    matchWinner: 0,
+};
+
+
+const updateWinner = (draft, player) => {
+    draft.winner = player;
+    if (player === 'player1') {
+        draft.p1Win += 1;
+        draft.matchWinner = draft.p1Win;  // Actualizar matchWinner con el valor de p1Win
+    } else {
+        draft.p2Win += 1;
+        draft.matchWinner = draft.p2Win;  // Actualizar matchWinner con el valor de p2Win
+    }
 };
 
 // Reducer slice
@@ -37,7 +49,6 @@ const gameSlice = createSlice({
             const otherplayer = player === "player1" ? "player2" : "player1";
             const currentPlayerScore = draft[player + "Score"];
         
-        
             if (currentPlayerScore <= 15) {
                 draft[player + "Score"] = currentPlayerScore + 15; //Score contiene la cifra que coloco después del +
                 return;
@@ -50,31 +61,19 @@ const gameSlice = createSlice({
 
             if (currentPlayerScore === 40) {
                 if (draft[otherplayer + "Score"] !== 40) {
-                    draft.winner = player;
-                    if (player === "player1") {
-                        draft.p1WinGame += 1;
-                    } else {
-                        draft.p2WinGame += 1;
-                    }                   
-                    return;
+                   updateWinner(draft, player);
                 }
             }
 
             if (draft.advantage === player) {
-                draft.winner = player;
-                if (player === "player1") {
-                    draft.p1WinGame += 1;
-                } else {
-                    draft.p2WinGame += 1;
-                }
-                return;
+                updateWinner(draft, player);
             }
 
             if (draft.advantage === null) {
                 draft.advantage = player;
                 return;
             }
-            
+                        
             draft.advantage = null;
         }),
         
